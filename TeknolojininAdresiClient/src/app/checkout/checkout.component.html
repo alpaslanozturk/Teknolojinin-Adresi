@@ -1,0 +1,85 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <form [formGroup]="checkoutForm" >
+    <div class="row">
+
+      <div class="col-md-7">
+        <!-- Billing Details -->
+        <div class="billing-details">
+          <div class="section-title">
+            <h3 class="title">Sipariş</h3>
+          </div>
+          <div class="form-group">
+            <input class="input" formControlName="firstName" type="text" name="firstName" placeholder="Ad">
+          </div>
+          <span class="help-block" *ngIf="checkoutForm.get('firstName').hasError('required') && checkoutForm.get('firstName').touched">
+            Ad Gerekli
+          </span>
+          <div class="form-group">
+            <input class="input" formControlName="lastName" type="text" name="lastName" placeholder="Soyad">
+          </div>
+          <span class="help-block" *ngIf="checkoutForm.get('lastName').hasError('required') && checkoutForm.get('lastName').touched">
+            Soyad Gerekli
+          </span>
+          <div class="form-group">
+            <input class="input" formControlName="email" type="email" name="email" placeholder="Email">
+            <span class="help-block" *ngIf="checkoutForm.get('email').hasError('required') && checkoutForm.get('email').touched">
+              Email Gerekli
+            </span>
+          </div>
+          
+          <div class="form-group">
+            <input class="input" formControlName="adress" type="text" name="adress" id="adress" placeholder="Adres">
+          </div>
+          <span class="help-block" *ngIf="checkoutForm.get('adress').hasError('required') && checkoutForm.get('adress').touched">
+            Adres Gerekli
+          </span>
+          <div class="form-group">
+            <input class="input" formControlName="phoneNumber" type="tel" name="phoneNumber" id="phoneNumber" placeholder="Telefon">
+          </div>
+          <span class="help-block" *ngIf="checkoutForm.get('phoneNumber').hasError('required') && checkoutForm.get('phoneNumber').touched">
+            Telefon Gerekli
+          </span>
+          
+        </div>
+        <!-- /Billing Details -->        
+      </div>
+
+      <!-- Order Details -->
+      <div class="col-md-5 order-details">
+        <div class="section-title text-center">
+          <h3 class="title">Siparişiniz</h3>
+        </div>
+        <div class="order-summary">
+          <div class="order-col">
+            <div><strong>Ürün</strong></div>
+            <div><strong>Toplam</strong></div>
+          </div>
+          <div class="order-products">
+            <div class="order-col" *ngFor="let item of cartLineList">
+              <div>{{item.quantity}} x {{item.productName}}</div>
+              <div>{{item.unitPrice}}</div>
+            </div>
+          </div>
+          <div class="order-col">
+            <div>Kargo</div>
+            <div><strong>Ücretsiz</strong></div>
+          </div>
+          <div class="order-col">
+            <div><strong>Toplam</strong></div>
+            <div><strong class="order-total">{{totalPrice}}</strong></div>
+          </div>
+        </div>       
+        <a [routerLink]="['/index']" (click)="checkout()" class="primary-btn order-submit">Siparişi Onayla</a>
+      </div>
+      <!-- /Order Details -->
+    </div>
+  </form>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->

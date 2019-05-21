@@ -1,0 +1,138 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- Product main img -->
+      <div class="col-md-5 col-md-push-1">
+        <div id="product-main-img">	
+						<ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>					
+        </div>
+        
+      </div>
+      <!-- /Product main img -->
+
+      <!-- Product details -->
+      <div class="col-md-5">
+        <div class="product-details">
+          <h2 class="product-name">{{product.productName}}</h2>
+          <div>
+            <div class="product-rating">
+              <i class="fa fa-star" *ngFor="let i of arrayOne(product.totalRating)"></i>
+              <i *ngFor="let i of arrayOneEmpty(5 - product.totalRating)" class="fa fa-star-o"></i>
+            </div>           
+          </div>
+          <div>
+            <h3 class="product-price">{{product.unitPrice}} <del class="product-old-price">{{product.oldPrice}}</del></h3>
+          </div>
+
+          <div class="add-to-cart">
+            <div class="qty-label">
+              Adet
+              <div class="input-number">
+                <input type="number" id="quantityHtml" (input)="onSearchChange($event.target.value)">
+              </div>
+            </div>
+            <button class="add-to-cart-btn" (click)="addCart(quantityHtml ,product)"><i class="fa fa-shopping-cart"></i>Sepete Ekle</button>
+          </div>
+
+          <ul class="product-links">
+            <li>Kategori:</li>
+            <li><a href="#">{{product.categoryName}}</a></li>
+          </ul>
+
+        </div>
+      </div>
+      <!-- /Product details -->
+
+      <!-- Product tab -->
+      <!-- Product tab -->
+					<div class="col-md-12">
+						<div id="product-tab">
+							<!-- product tab nav -->
+							<ul class="tab-nav">
+								<li class="active"><a data-toggle="tab" href="#tab1">Yorumlar</a></li>
+							</ul>
+							<!-- /product tab nav -->
+
+							<!-- product tab content -->
+							<div class="tab-content">
+								
+								<!-- tab1  -->
+								<div id="tab1" class="tab-pane fade in active">
+									<div class="row">
+										<!-- Rating -->
+										<div class="col-md-3">
+											<div id="rating">
+												<div class="rating-avg">
+													<span>{{product.totalRating | number: '1.2'}}</span>
+													<div class="rating-stars">
+														<i *ngFor="let i of arrayOne(product.totalRating)" class="fa fa-star"></i>
+														<i *ngFor="let i of arrayOneEmpty(5 - product.totalRating)" class="fa fa-star-o"></i>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+										<!-- /Rating -->
+
+										<!-- Reviews -->
+										<div class="col-md-6">
+											<div id="reviews">
+												<ul class="reviews">
+													<li *ngFor="let item of commentsList">
+														<div class="review-heading">
+															<div class="review-rating">
+                                <i *ngFor="let i of arrayOne(item.rating)" class="fa fa-star"></i>
+                                <i *ngFor="let i of arrayOneEmpty(5 - item.rating)" class="fa fa-star-o"></i>
+															</div>
+														</div>
+														<div class="review-body">
+															<p>{{item.comment}}</p>
+                            </div>
+                            <hr />
+													</li>
+													
+												</ul>												
+											</div>
+										</div>
+										<!-- /Reviews -->
+
+										<!-- Review Form -->
+										<div class="col-md-3">
+											<div id="review-form">
+												<form [formGroup]="commentForm" (ngSubmit)="addComment()" class="review-form">
+																								
+													<textarea formControlName="comment" name="comment" id="comment" class="input" placeholder="Your Review"></textarea>
+													<div class="input-rating">
+														<span>Puan Ver: </span>
+														<div class="stars">
+															<input (click)="yourRating(5)" id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+															<input (click)="yourRating(4)" id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+															<input (click)="yourRating(3)" id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+															<input (click)="yourRating(2)" id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+															<input (click)="yourRating(1)" id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+														</div>
+													</div>
+													<button class="primary-btn">Submit</button>
+												</form>
+											</div>
+										</div>
+										<!-- /Review Form -->
+									</div>
+								</div>
+								<!-- /tab1  -->
+							</div>
+							<!-- /product tab content  -->
+						</div>
+					</div>
+					<!-- /product tab -->
+				
+      <!-- /product tab -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->

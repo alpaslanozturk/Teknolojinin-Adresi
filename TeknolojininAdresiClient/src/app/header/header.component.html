@@ -1,0 +1,134 @@
+<!-- HEADER -->
+<header>
+  <!-- TOP HEADER -->
+  <div id="top-header">
+    <div class="container">
+      <ul class="header-links pull-left">
+        <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+        <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+        <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+      </ul>
+      <ul class="header-links pull-right">   
+        <li *ngIf="!isAuthenticated"><form [formGroup]="loginForm" (ngSubmit)="login()" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" name="userName" 
+            formControlName="userName" required type="text" placeholder="Kullanıcı Adı">
+            <input class="form-control mr-sm-2" name="password" 
+            formControlName="password" required type="password" placeholder="Parola">
+            <button [routerLink]="['/login']" class="btn btn-secondary my-2 my-sm-0" [disabled]="!loginForm.valid"  type="submit">Oturum Aç</button>
+          </form></li>   
+          <li *ngIf="!isAuthenticated"><a [routerLink]="['/register']"><i class="fa fa-user-o"></i>Kaydol</a></li>
+          <li *ngIf="isAuthenticated" style="color: white">Hoşgeldin {{currentUserName}}</li>
+          <li *ngIf="isAuthenticated"><a [routerLink]="['/index']" (click)="logout()"><i class="fa fa-user-o"></i>Çıkış</a></li>
+      </ul>
+      
+    </div>
+  </div>
+  <!-- /TOP HEADER -->
+
+  <!-- MAIN HEADER -->
+  <div id="header">
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <!-- LOGO -->
+        <div class="col-md-3">
+          <div class="header-logo">
+            <a href="#" class="logo">
+              <!-- <img src="./assets/img/logo.png" alt=""> -->
+              <h3 style="color: white " id="baslik">Teknolojinin Adresi</h3>
+            </a>
+          </div>
+        </div>
+        <!-- /LOGO -->
+
+        <!-- SEARCH BAR -->
+        <div class="col-md-6">
+          <div class="header-search">
+            <div>
+              <select class="input-select" [(ngModel)]="catSelected" (ngModelChange)="onCategorySelected($event)">
+                <option value="">Tüm Kategoriler</option>
+                <option *ngFor="let item of cList" [value]="item.categoryId">{{item.categoryName}}</option>
+              </select>
+              <input class="input" placeholder="Arama" [(ngModel)]="searchText" name="searchText">
+              <button class="search-btn"> <a [routerLink]="['/store', catSelected, searchText]">Arama</a></button>
+            </div>
+          </div>
+        </div>
+        <!-- /SEARCH BAR -->
+
+        <!-- ACCOUNT -->
+        <div class="col-md-3 clearfix">
+          <div class="header-ctn">
+            
+
+            <!-- Cart -->
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" (click)="getMainCart()">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Sepetim</span>
+              </a>
+              <div class="cart-dropdown">
+                <div class="cart-list">
+                  <div class="product-widget" *ngFor="let item of cartLineList">
+                    <div class="product-img">
+                      <img src="{{item.pictureUrl}}" alt="">
+                    </div>
+                    <div class="product-body">
+                      <h3 class="product-name"><a href="#">{{item.productName}}</a></h3>
+                      <h4 class="product-price"><span class="qty">{{item.quantity}}x</span>{{item.unitPrice}}</h4>
+                    </div>
+                    <button class="delete" (click)="removeToCart(item.productId)"><i class="fa fa-close"></i></button>
+                  </div>
+                 
+                </div>
+                <div class="cart-summary">                 
+                  <h5>Toplam : {{totalPrice}}</h5>
+                </div>
+                <div class="cart-btns">
+                  <a [routerLink]="['/checkout', cartsId]">Siparişi Tamamla  <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- /Cart -->
+
+            <!-- Menu Toogle -->
+            <div class="menu-toggle">
+              <a href="#">
+                <i class="fa fa-bars"></i>
+                <span>Menu</span>
+              </a>
+            </div>
+            <!-- /Menu Toogle -->
+          </div>
+        </div>
+        <!-- /ACCOUNT -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+<!-- NAVIGATION -->
+<nav id="navigation">
+  <!-- container -->
+  <div class="container">
+    <!-- responsive-nav -->
+    <div id="responsive-nav">
+      <!-- NAV -->
+      <ul class="main-nav nav navbar-nav">
+        <li routerLinkActive="active"><a [routerLink]="['/index']">Anasayfa</a></li>
+        <li *ngFor="let item of cList" routerLinkActive="active" ><a [routerLink]="['/store', item.categoryId]">{{item.categoryName}}</a></li>
+        <li *ngIf="isAdmin" routerLinkActive="active"><a [routerLink]="['/adminProduct']">Admin Ürün</a></li>
+        <li *ngIf="isAdmin" routerLinkActive="active"><a [routerLink]="['/adminCategory']">Admin Kategori</a></li>
+      </ul>
+      <!-- /NAV -->
+    </div>
+    <!-- /responsive-nav -->
+  </div>
+  <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+<router-outlet></router-outlet>

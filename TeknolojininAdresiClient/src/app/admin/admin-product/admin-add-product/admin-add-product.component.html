@@ -1,0 +1,78 @@
+<div class="container" style="max-width: 600px">
+<form class="form-group" [formGroup]="productForm">
+
+  <div class="form-control">
+      <label class="col-md-5">Ürün Id</label>
+      <input class="col-md-7" type="text" formControlName="productId" disabled="true"
+           value="" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Ürün Ad</label>
+      <input [ngClass]="{
+      'is-invalid':
+      productForm.get('productName').errors && productForm.get('productName').touched
+    }" class="col-md-7" type="text" formControlName="productName" 
+          value="" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Ürün Fiyat</label>
+      <input [ngClass]="{
+          'is-invalid':
+          productForm.get('unitPrice').errors && productForm.get('unitPrice').touched
+        }" class="col-md-7" type="text" formControlName="unitPrice" 
+          value="" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Ürün Eski Fiyat</label>
+      <input [ngClass]="{
+              'is-invalid':
+              productForm.get('oldPrice').errors && productForm.get('oldPrice').touched
+            }" class="col-md-7" type="text" formControlName="oldPrice" 
+          value="" />
+  </div>
+
+  <div class="form-control">
+          <label class="col-md-5">Stok Sayısı</label>
+          <input [ngClass]="{
+                  'is-invalid':
+                  productForm.get('unitsInStock').errors && productForm.get('unitsInStock').touched
+                }" class="col-md-7" type="text" formControlName="unitsInStock" 
+              value="" />
+  </div>
+
+  <div class="form-control">
+          <label class="col-md-5">Satılma Sayısı</label>
+          <input [ngClass]="{
+                  'is-invalid':
+                  productForm.get('sellCount').errors && productForm.get('sellCount').touched
+                }" class="col-md-7" type="text" formControlName="sellCount" 
+              value="" />
+  </div>
+  <div class="form-control">
+      
+  
+      <label class="col-md-5">Kategori</label>
+      <select class="col-md-7" [(ngModel)]="catSelected" formControlName="categoriesId" (ngModelChange)="onCategorySelected($event)">
+        <option *ngFor="let item of catList" [value]="item.categoryId">
+      {{item.categoryName}}
+        </option>
+      </select>
+  
+  </div>
+
+  <div>
+      <button [disabled]="productForm.invalid" type="button" class="btn btn-warning" (click)="addProduct()">
+          Ekle
+      </button>
+  </div>
+</form>
+
+<p>Form Value: {{ productForm.value | json }}</p>
+<p>Form Status: {{ productForm.status | json }}</p>
+
+<app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+</div>
+

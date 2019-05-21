@@ -1,0 +1,62 @@
+
+<div class="container">
+    <button
+    type="button"
+    class="btn btn-warning"
+    (click)="addProduct()"
+  >
+    Ekle
+  </button>
+<div class="row" *ngIf="check == true" (mouseleave)="mouseLeft()">
+  <div class="col-md-7">
+    <table class="table table-bordered table-hover container">
+      <tr>
+        <th>Ürün Id</th>
+        <th>Ürün Ad</th>
+        <th>Ürün Fiyatı</th>
+        <th>Eski Fiyat</th>
+        <th>Eklenme Tarihi</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+      </tr>
+      <tr *ngFor="let item of pList">
+        <td>{{ item.productId }}</td>
+        <td>{{ item.productName }}</td>
+        <td>{{ item.unitPrice }}</td>
+        <td>{{ item.oldPrice }}</td>
+        <td>{{ item.addedDate }}</td>
+        <td><button (click)="updateProduct(item)"><i class="fa fa-edit"></i></button></td>
+      <td><button (click)="deleteProduct(item.productId)"><i class="fa fa-trash-o"></i></button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-md-5">
+    <app-admin-product-detail [currentProduct]="currentProduct"></app-admin-product-detail>
+  </div>
+</div>
+
+
+<div class="col-md-12" *ngIf="check == false">
+  <table class="table table-bordered table-secondary table-hover container">
+    <tr>
+      <th>Ürün Id</th>
+        <th>Ürün Ad</th>
+        <th>Ürün Fiyatı</th>
+        <th>Eski Fiyat</th>
+        <th>Eklenme Tarihi</th>
+        <th>Güncelle</th>
+        <th>Sil</th>
+    </tr>
+    <tr *ngFor="let item of pList">
+      <td>{{ item.productId }}</td>
+      <td>{{ item.productName }}</td>
+      <td>{{ item.unitPrice }}</td>
+      <td>{{ item.oldPrice }}</td>
+      <td>{{ item.addedDate }}</td>
+      <td><button (click)="updateProduct(item)"><i class="fa fa-edit"></i></button></td>
+      <td><button (click)="deleteProduct(item.productId)"><i class="fa fa-trash-o"></i></button></td>
+    </tr>
+  </table>
+</div>
+</div>

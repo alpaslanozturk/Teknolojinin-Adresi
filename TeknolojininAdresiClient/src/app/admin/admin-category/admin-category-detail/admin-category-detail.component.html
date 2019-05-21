@@ -1,0 +1,37 @@
+<form class="form-group" [formGroup]="categoryForm">
+
+  <div class="form-control">
+      <label class="col-md-5">Kategori Id</label>
+      <input class="col-md-7" type="text" formControlName="categoryId" disabled="true"
+           value="{{ currentCategory.categoryId }}" [(ngModel)]="currentCategory.categoryId" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Kategori Ad</label>
+      <input [ngClass]="{
+      'is-invalid':
+      categoryForm.get('categoryName').errors && categoryForm.get('categoryName').touched
+    }" class="col-md-7" type="text" formControlName="categoryName" 
+          value="{{ currentCategory.categoryName }}" [(ngModel)]="currentCategory.categoryName" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Açıklama</label>
+      <input [ngClass]="{
+          'is-invalid':
+          categoryForm.get('description').errors && categoryForm.get('description').touched
+        }" class="col-md-7" type="text" formControlName="description" 
+          value="{{ currentCategory.description }}" [(ngModel)]="currentCategory.description" />
+  </div>
+
+  <div>
+      <button [disabled]="categoryForm.invalid" type="button" class="btn btn-warning" (click)="updateCategory()">
+          Güncelle
+      </button>
+  </div>
+</form>
+
+<p>Form Value: {{ categoryForm.value | json }}</p>
+<p>Form Status: {{ categoryForm.status | json }}</p>
+
+<app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>

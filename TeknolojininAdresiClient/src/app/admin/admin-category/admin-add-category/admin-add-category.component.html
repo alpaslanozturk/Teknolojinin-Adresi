@@ -1,0 +1,39 @@
+<div class="container" style="max-width: 600px">
+<form class="form-group" [formGroup]="categoryForm">
+
+  <div class="form-control">
+      <label class="col-md-5">Kategori Id</label>
+      <input class="col-md-7" type="text" formControlName="categoryId" disabled="true"
+           value=""  />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Kategori Ad</label>
+      <input [ngClass]="{
+      'is-invalid':
+      categoryForm.get('categoryName').errors && categoryForm.get('categoryName').touched
+    }" class="col-md-7" type="text" formControlName="categoryName" 
+          value="" />
+  </div>
+
+  <div class="form-control">
+      <label class="col-md-5">Açıklama</label>
+      <input [ngClass]="{
+          'is-invalid':
+          categoryForm.get('description').errors && categoryForm.get('description').touched
+        }" class="col-md-7" type="text" formControlName="description" 
+          value=""  />
+  </div>
+
+  <div>
+      <button [disabled]="categoryForm.invalid" type="button" class="btn btn-warning" (click)="addCategory()">
+          Ekle
+      </button>
+  </div>
+</form>
+
+<p>Form Value: {{ categoryForm.value | json }}</p>
+<p>Form Status: {{ categoryForm.status | json }}</p>
+
+<app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+</div>

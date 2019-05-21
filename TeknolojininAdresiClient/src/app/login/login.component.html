@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="form-login container" style="max-width: 400px">
+  <h2 class="mt-5">Giriş</h2>
+  <div class="form-group">
+    <input type="text" id="userName" name="userName" formControlName="userName" class="form-control" placeholder="Kullanıcı Adı"
+      autofocus>
+    <span class="help-block" *ngIf="loginForm.get('userName').hasError('required') && loginForm.get('userName').touched">
+      Kullanıcı Adı gerekli
+    </span>
+  </div>
+  <div class="form-group">
+    <input type="password" id="password" name="password" formControlName="password" class="form-control" placeholder="Parola">
+    <span class="help-block" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+      Parola gerekli
+    </span>
+  </div>
+  
+  <button class="btn btn-lg btn-danger btn-block" [disabled]="!loginForm.valid" type="submit">Giriş</button>
+</form>

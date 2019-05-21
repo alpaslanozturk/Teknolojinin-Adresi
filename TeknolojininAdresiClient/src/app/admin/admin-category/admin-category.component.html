@@ -1,0 +1,58 @@
+
+<div class="container">
+  <button
+  type="button"
+  class="btn btn-warning"
+  (click)="addCategory()"
+>
+  Ekle
+</button>
+<div class="row" *ngIf="check == true" (mouseleave)="mouseLeft()">
+<div class="col-md-7">
+  <table class="table table-bordered table-hover container">
+    <tr>
+      <th>Kategori Id</th>
+      <th>Kategori Ad</th>
+      <th>Açıklama</th>
+      <th>Resim</th>
+      <th>Güncelle</th>
+      <th>Sil</th>
+    </tr>
+    <tr *ngFor="let item of cList">
+      <td>{{ item.categoryId }}</td>
+      <td>{{ item.categoryName }}</td>
+      <td>{{ item.description }}</td>
+      <td><img src="{{ item.pictureUrl }}" height="55px" width="75px"> </td>
+      <td><button (click)="updateCategory(item)"><i class="fa fa-edit"></i></button></td>
+    <td><button (click)="deleteCategory(item.categoryId)"><i class="fa fa-trash-o"></i></button></td>
+    </tr>
+  </table>
+</div>
+
+<div class="col-md-5">
+  <app-admin-category-detail [currentCategory]="currentCategory"></app-admin-category-detail>
+</div>
+</div>
+
+
+<div class="col-md-12" *ngIf="check == false">
+<table class="table table-bordered table-secondary table-hover container">
+  <tr>
+    <th>Kategori Id</th>
+    <th>Kategori Ad</th>
+    <th>Açıklama</th>
+    <th>Resim</th>
+    <th>Güncelle</th>
+    <th>Sil</th>
+  </tr>
+  <tr *ngFor="let item of cList">
+    <td>{{ item.categoryId }}</td>
+    <td>{{ item.categoryName }}</td>
+    <td>{{ item.description }}</td>
+    <td><img src="{{ item.pictureUrl }}" height="55px" width="75px"> </td>
+    <td><button (click)="updateCategory(item)"><i class="fa fa-edit"></i></button></td>
+  <td><button (click)="deleteCategory(item.categoryId)"><i class="fa fa-trash-o"></i></button></td>
+  </tr>
+</table>
+</div>
+</div>
