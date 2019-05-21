@@ -8,3 +8,7 @@
 
 You should have to run "npm i" command before "ng serve" for node_modules folder.
 Because the folder can be very heavy.
+
+You can try
+User Name = Admin1, Password = 123456
+User Name = User1, Password = 123456
